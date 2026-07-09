@@ -1,0 +1,10 @@
+{
+  "type": "content",
+  "modid": "recyclearmors",
+  "name": "Recycle Armors",
+  "authors": [
+    "StardustVulpine @ FoxTale Group"
+  ],
+  "description": "An example showcase of content mod additions.",
+  "version": "0.0.1"
+}
