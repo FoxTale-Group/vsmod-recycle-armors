@@ -1,0 +1,33 @@
+{
+    "ingredientPattern": "H,C,A",
+    "width": 1,
+    "height": 3,
+
+    "ingredients": {
+        "H": {
+            "type": "item",
+            "code": "game:hammer-*",
+            "isTool": true
+        },
+        "C": {
+            "type": "item",
+            "code": "game:chisel-*",
+            "isTool": true
+        },
+        "A": {
+            "type": "item",
+            "code": "game:armor-legs-plate-*",
+            "name": "metal",
+            "returnedStack": {
+                "type": "item",
+                "code": "game:leather-normal-plain",
+                "quantity": 8
+            }
+        }
+    },
+    "output": {
+        "type": "item",
+        "code": "game:metalbit-{metal}",
+        "quantity": 440
+    }
+}

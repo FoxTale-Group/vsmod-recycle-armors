@@ -1,0 +1,17 @@
+{
+  "type": "code",
+  "modid": "recyclearmors",
+  "name": "Recycle Armors",
+  "description": "A simple mod adding recipies to recycle armors back to bits with configurable return rate",
+  "version": "1.0.0",
+  "authors": [
+    "StardustVulpine"
+  ],
+  "dependencies": {
+    "game": "1.22.0"
+  },
+  "side": "universal",
+  "requiredOnClient": true,
+  "requiredOnServer": true,
+  "website": "https://github.com/FoxTale-Group/vsmod-recycle-armors"
+}
