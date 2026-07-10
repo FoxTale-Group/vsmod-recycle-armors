@@ -7,7 +7,12 @@ on:
         description: 'Version number (eg. 1.0.0)'
         required: true
         type: string
-        
+      
+      changelog:
+        description: 'Changelog'
+        required: false
+        type: string
+
 permissions:
   contents: write
   
@@ -51,3 +56,27 @@ jobs:
           retention-days: 1
           archive: false
           compression-level: 0
+  
+  release:
+    name: Publish Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: recycle-armors-v${{ inputs.version }}.zip
+          skip-decompress: true
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ inputs.version }}
+          name: v${{ inputs.version }}
+          files: recycle-armors-v${{ inputs.version }}.zip
+          body: | 
+            # Automated release of Recycle Armors version ${{ inputs.version }}:
+            
+            **Changelog:**
+            ${{ inputs.changelog }}
+          generate_release_notes: true
