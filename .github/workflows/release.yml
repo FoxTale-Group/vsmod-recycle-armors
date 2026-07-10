@@ -49,3 +49,5 @@ jobs:
           name: recycle-armors-v${{ inputs.version }}
           path: recycle-armors-v${{ inputs.version }}.zip
           retention-days: 1
+          archive: false
+          compression-level: 0
