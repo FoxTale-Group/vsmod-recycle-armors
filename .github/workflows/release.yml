@@ -1,0 +1,51 @@
+name: Build and Release Mod
+
+on:
+  workflow_dispatch:
+    inputs: 
+      version:
+        description: 'Version number (eg. 1.0.0)'
+        required: true
+        type: string
+        
+permissions:
+  contents: write
+  
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Repository
+        uses: actions/checkout@v7
+      
+      - name: Setup .NET10
+        uses: actions/setup-dotnet@v5
+        with: 
+          dotnet-version: '10.0.x'
+          
+      - name: Bump Version in modinfo.json
+        run: |
+          jq '.version = "${{ inputs.version }}"' modinfo.json > tmp.json
+          mv tmp.json modinfo.json
+          
+      - name: Compile Mod
+        run: dotnet build -c Release
+        
+      - name: Stage and Package
+        run: |
+          mkdir build_stage
+          cp modinfo.json build_stage/
+          cp modicon.png build_stage/
+          cp -r assets/ build_stage
+          cp bin/Release/net10.0/RecycleArmors.dll build_stage/
+          cd build_stage
+          zip -r ../recycle-armors-v${{ inputs.version }}.zip *
+          cd ..
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: recycle-armors-v${{ inputs.version }}
+          path: recycle-armors-v${{ inputs.version }}.zip
+          retention-days: 1
