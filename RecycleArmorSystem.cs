@@ -17,8 +17,8 @@ namespace RecycleArmors {
                 api.Logger.Error("Failed to load Recycle Armors config. Faling back to default values. Error: {0}", e);
             }
 
-            if (Config != null) return;
-            Config = new RecycleConfig();
+            if (Config == null) Config = new RecycleConfig();
+            
             api.StoreModConfig(Config, configFileName);
         }
 
@@ -26,7 +26,7 @@ namespace RecycleArmors {
             base.AssetsFinalize(api);
 
             float returnRate = Config?.ReturnRate ?? 0.75f;
-            float toolDurabilityCostMult =  Config?.ToolDurabilityCostMultiplier ?? 1.0f;
+            float toolDurabilityCostMult = Config?.ToolDurabilityCostMultiplier ?? 1.0f;
 
             foreach (GridRecipe recipe in api.World.GridRecipes)
             {
@@ -39,13 +39,13 @@ namespace RecycleArmors {
                 foreach (var ingredient in recipe.ResolvedIngredients!)
                 {
                     // Scale the returned leather quantity
-                    if (ingredient!.ReturnedStack?.ResolvedItemStack == null) {
+                    if (ingredient!.ReturnedStack?.ResolvedItemStack != null) {
                         float baseReturnQuantity = ingredient.ReturnedStack!.ResolvedItemStack!.StackSize; 
                         ingredient.ReturnedStack!.ResolvedItemStack.StackSize = (int)Math.Max(1, Math.Round(baseReturnQuantity * returnRate));
                     }
                     
                     // Scale tool durability cost
-                    if (!ingredient.IsTool) {
+                    if (ingredient.IsTool) {
                         float baseToolDurabilityCost = ingredient.ToolDurabilityCost; 
                         ingredient.ToolDurabilityCost = (int)Math.Max(1, Math.Round(baseToolDurabilityCost *  toolDurabilityCostMult));
                     }
