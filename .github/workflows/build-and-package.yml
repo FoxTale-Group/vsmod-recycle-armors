@@ -24,6 +24,9 @@ jobs:
         with: 
           dotnet-version: '10.0.x'
           
+      - name: Add JSON package
+        run: dotnet add package Newtonsoft.Json
+          
       - name: Bump Version in modinfo.json
         run: |
           jq '.version = "${{ inputs.version }}"' modinfo.json > tmp.json
