@@ -7,22 +7,29 @@
         "H": {
             "type": "item",
             "code": "game:hammer-*",
-            "isTool": true
+            "isTool": true,
+            "toolDurabilityCost": 5
         },
         "C": {
             "type": "item",
             "code": "game:chisel-*",
-            "isTool": true
+            "isTool": true,
+            "toolDurabilityCost": 25
         },
         "A": {
             "type": "item",
-            "code": "game:armor-head-chain-*",
-            "name": "metal"
+            "code": "game:armor-body-scale-*",
+            "name": "metal",
+            "returnedStack": {
+                "type": "item",
+                "code": "game:leather-normal-plain",
+                "quantity": 14
+            }
         }
     },
     "output": {
         "type": "item",
         "code": "game:metalbit-{metal}",
-        "quantity": 120
+        "quantity": 560
     }
 }

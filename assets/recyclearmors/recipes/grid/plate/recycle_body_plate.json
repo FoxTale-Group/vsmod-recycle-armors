@@ -7,12 +7,14 @@
         "H": {
             "type": "item",
             "code": "game:hammer-*",
-            "isTool": true
+            "isTool": true,
+            "toolDurabilityCost": 5
         },
         "C": {
             "type": "item",
             "code": "game:chisel-*",
-            "isTool": true
+            "isTool": true,
+            "toolDurabilityCost": 30
         },
         "A": {
             "type": "item",

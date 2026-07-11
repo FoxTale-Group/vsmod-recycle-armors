@@ -26,6 +26,7 @@ namespace RecycleArmors {
             base.AssetsFinalize(api);
 
             float returnRate = Config?.ReturnRate ?? 0.75f;
+            float toolDurabilityCostMult =  Config?.ToolDurabilityCostMultiplier ?? 1.0f;
 
             foreach (GridRecipe recipe in api.World.GridRecipes)
             {
@@ -35,12 +36,20 @@ namespace RecycleArmors {
                     float baseQuantity = recipe.Output.ResolvedItemStack.StackSize;
                     recipe.Output!.ResolvedItemStack.StackSize = (int)Math.Max(1, Math.Round(baseQuantity * returnRate));
                 }
-                // Scale the returned leather quantity
                 foreach (var ingredient in recipe.ResolvedIngredients!)
                 {
-                    if (ingredient!.ReturnedStack?.ResolvedItemStack == null) continue;
-                    float baseReturnQuantity = ingredient.ReturnedStack.ResolvedItemStack.StackSize;
-                    ingredient.ReturnedStack!.ResolvedItemStack.StackSize = (int)Math.Max(1, Math.Round(baseReturnQuantity * returnRate));
+                    // Scale the returned leather quantity
+                    if (ingredient!.ReturnedStack?.ResolvedItemStack == null) {
+                        float baseReturnQuantity = ingredient.ReturnedStack!.ResolvedItemStack!.StackSize; 
+                        ingredient.ReturnedStack!.ResolvedItemStack.StackSize = (int)Math.Max(1, Math.Round(baseReturnQuantity * returnRate));
+                    }
+                    
+                    // Scale tool durability cost
+                    if (!ingredient.IsTool) {
+                        float baseToolDurabilityCost = ingredient.ToolDurabilityCost; 
+                        ingredient.ToolDurabilityCost = (int)Math.Max(1, Math.Round(baseToolDurabilityCost *  toolDurabilityCostMult));
+                    }
+                    
                 }
             }
         }
