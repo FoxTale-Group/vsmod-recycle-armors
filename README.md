@@ -1,5 +1,12 @@
 # Recycle Armors
 
+![Version](https://img.shields.io/github/v/release/FoxTale-Group/vsmod-recycle-armors?include_prereleases&style=for-the-badge&logo=github&label=Version&color=green)
+![Build](https://img.shields.io/github/actions/workflow/status/FoxTale-Group/vsmod-recycle-armors/build-and-package.yml?branch=main&style=for-the-badge&label=Build)
+![Issues](https://img.shields.io/github/issues/FoxTale-Group/vsmod-recycle-armors?style=for-the-badge&logo=github&label=Issues&color=yellow)
+![License](https://img.shields.io/github/license/FoxTale-Group/vsmod-recycle-armors?style=for-the-badge&logo=github&label=License&color=blue)
+
+
+
 A Vintage Story mod that allows players to recycle metal armors (chain, scale, plate) back into thier base components: metal bits and leather using hammer and chisel.
 
 ## Requrements
